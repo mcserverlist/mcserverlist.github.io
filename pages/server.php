@@ -184,5 +184,5 @@ if($server->data->cachetime > time() - $settings->cache_reset_time) {
 
 <!-- Recaptcha base -->
 <div id="recaptcha_base">
-	<div id="recaptcha" style="display:none;"><?php echo recaptcha_get_html($settings->public_key); ?></div>
+	<div id="recaptcha" style="display:none;"><?php echo recaptcha_get_html($settings->public_key, null, $settings->is_secure); ?></div>
 </div>

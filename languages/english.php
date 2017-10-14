@@ -177,7 +177,6 @@ $language['forms']['repeat_password']	 				= "Repeat Password";
 $language['forms']['change_password_help']				= "Leave empty if you don't want to change the password";
 $language['forms']['signin']			   	 			= "Sign In";
 $language['forms']['lost_password']   	 				= "I forgot my password";
-$language['forms']['resend_activation']  				= "Resend activation email";
 $language['forms']['submit']			 				= "Submit";
 $language['forms']['settings_title']					= "Website title";
 $language['forms']['settings_meta_description']			= "Meta Description";

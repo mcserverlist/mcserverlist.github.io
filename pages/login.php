@@ -72,6 +72,5 @@ if(!empty($_POST)) {
 	</div>
 
 	<a href="lost-password"  role="button"><?php echo $language['forms']['lost_password']; ?></a><br />
-	<a href="resend-activation" role="button"><?php echo $language['forms']['resend_activation']; ?></a>
 
 </form>

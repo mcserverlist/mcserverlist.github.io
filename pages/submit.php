@@ -174,7 +174,7 @@ display_notifications();
 	</div>
 
 	<div class="form-group">
-		  <?php echo recaptcha_get_html($settings->public_key); ?>
+		  <?php echo recaptcha_get_html($settings->public_key, null, $settings->is_secure); ?>
 	</div>
 
 	<div class="form-group">

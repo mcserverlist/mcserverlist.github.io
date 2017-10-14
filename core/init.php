@@ -31,6 +31,8 @@ foreach(Plugin::$auto_files as $file) include $file;
 $errors 	= array();
 $settings 	= settings_data();
 $token 		= new CsrfProtection();
+$url_check = parse_url($settings->url);
+$settings->is_secure = ($url_check['scheme'] == 'https');
 
 
 /* Set the default timezone if its not set in the ini file */

@@ -5,7 +5,7 @@
 	Check out my Twitter @grohsfabian | My website http://grohsfabian.com
 	Portfolio: http://codecanyon.net/user/grohsfabian
  */
- 
+
 User::logged_in_redirect();
 include 'core/functions/recaptchalib.php';
 
@@ -59,7 +59,7 @@ if(!empty($_POST)) {
 	</div>
 
 	<div class="form-group">
-		  <?php echo recaptcha_get_html($settings->public_key); ?>
+		  <?php echo recaptcha_get_html($settings->public_key, null, $settings->is_secure); ?>
 	</div>
 
 	<div class="form-group">

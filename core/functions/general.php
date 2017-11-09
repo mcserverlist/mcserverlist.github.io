@@ -146,7 +146,7 @@ function sendmail($to, $from, $title, $message) {
 		$mail->SMTPAuth = true;
 		$mail->isHTML(true);
 
-		$mail->Host = gethostbyname($settings->smtp_host);
+		$mail->Host = gethostbyname('tls://'.$settings->smtp_host);
 		$mail->Port = $settings->smtp_port;
 		$mail->Username = $settings->smtp_user;
 		$mail->Password = $settings->smtp_pass;
@@ -157,7 +157,8 @@ function sendmail($to, $from, $title, $message) {
 		$mail->Subject = $title;
 		$mail->Body = $message;
 
-		if (!$mail->send()) {
+		$sent = $mail->send();
+		if (!$sent) {
 			send_mail($to, $settings->contact_email, $title, $message);
 		}
 

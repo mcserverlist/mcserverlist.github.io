@@ -19,7 +19,7 @@
 				<a class="dropdown-item" data-confirm="<?php echo $language['messages']['reset_votes']; ?>" href="admin/reset"><?php echo $language['menu']['reset_votes']; ?></a>
 				<?php } ?>
 				<a class="dropdown-item" href="admin/website-statistics"><?php echo $language['menu']['website_statistics']; ?></a>
-
+				<a class="dropdown-item" href="logout"><?php echo $language['menu']['logout']; ?></a>
 			</div>
 			</li>
 			<?php endif;?>

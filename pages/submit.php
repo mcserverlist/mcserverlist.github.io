@@ -6,8 +6,7 @@
 	Portfolio: http://codecanyon.net/user/grohsfabian
  */
 
-include 'core/functions/recaptchalib.php';
-
+$captcha = new Captcha();
 $address = $query_address = $name = $country_code = $youtube_link = $description = null;
 $connection_port = $query_port = 25565;
 
@@ -26,8 +25,6 @@ if(!empty($_POST)) {
 	$youtube_id = youtube_url_to_id($youtube_link);
 	$description = filter_var($_POST['description'], FILTER_SANITIZE_STRING);
 	$user_id = (User::logged_in()) ? $account_user_id : 0;
-	
-	$captcha = recaptcha_check_answer ($settings->private_key, $_SERVER["REMOTE_ADDR"], $_POST["recaptcha_challenge_field"], $_POST["recaptcha_response_field"]);
 	$required_fields = array('address', 'connection_port', 'query_port', 'category_id', 'name');
 
 	/* Get category data */
@@ -53,15 +50,20 @@ if(!empty($_POST)) {
 		$_SESSION['error'][] = $language['errors']['category_not_found'];
 	} else {
 
-		$mcapi_url = 'https://mcapi.us/server/status?ip='.$address.'&port='.$query_port;
-		$raw_data = file_get_contents($mcapi_url);
-		$info = ($raw_data) ? json_decode($raw_data) : false;
-		$status = $info->online;
+		try {
+			$mcapi_url = 'https://mcapi.us/server/status?ip='.$address.'&port='.$query_port;
+			$raw_data = file_get_contents($mcapi_url);
+			$info = ($raw_data) ? json_decode($raw_data) : false;
+			$status = $info->online;
+		} catch(Exception $e) {
+			// :)
+		}
 
-		if(!$info && $info->online) {
+
+		if(!$info) {
 			$_SESSION['error'][] = $language['errors']['server_no_data'];
 		} else
-		if(!$info && !$info->online) {
+		if(!$info->online) {
 			$_SESSION['error'][] = $language['errors']['server_offline'];
 		}
 
@@ -76,7 +78,7 @@ if(!empty($_POST)) {
 	}
 
 	/* More checks */
-	if(!$captcha->is_valid) {
+	if(!$captcha->is_valid()) {
 		$_SESSION['error'][] = $language['errors']['captcha_not_valid'];
 	}
 	if(strlen($name) > 64 || strlen($name) < 3) {
@@ -175,7 +177,7 @@ display_notifications();
 	</div>
 
 	<div class="form-group">
-		  <?php echo recaptcha_get_html($settings->public_key, null, $settings->is_secure); ?>
+		  <?php $captcha->display(); ?>
 	</div>
 
 	<div class="form-group">

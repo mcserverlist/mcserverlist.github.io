@@ -5,20 +5,17 @@
 	Check out my Twitter @grohsfabian | My website http://grohsfabian.com
 	Portfolio: http://codecanyon.net/user/grohsfabian
  */
- 
-include '../core/init.php';
-include '../core/functions/recaptchalib.php';
 
-/* Define the captcha variable */
-$captcha = recaptcha_check_answer ($settings->private_key, $_SERVER['REMOTE_ADDR'], $_POST['recaptcha_challenge_field'], $_POST['recaptcha_response_field']);
+include '../core/init.php';
 
 /* Check for any errors */
 $result = $database->query("SELECT `id` FROM `points` WHERE `type` = 1 AND `server_id` = {$_SESSION['server_id']} AND `ip` = '{$_SERVER['REMOTE_ADDR']}' AND `timestamp` > UNIX_TIMESTAMP(NOW() - INTERVAL 1 DAY)");
+$captcha = new Captcha();
 
 if($result->num_rows) {
 	$errors[] = $language['errors']['already_voted'];
 }
-if(!$captcha->is_valid) {
+if(!$captcha->is_valid()) {
 	$errors[] = $language['errors']['captcha_not_valid'];
 }
 

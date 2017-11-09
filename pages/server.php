@@ -6,10 +6,10 @@
 	Portfolio: http://codecanyon.net/user/grohsfabian
  */
 
-
+$captcha = new Captcha();
 include 'template/includes/modals/report.php';
 include 'template/includes/modals/vote.php';
-include 'core/functions/recaptchalib.php';
+
 
 /* Check if server exists and the GET variables are not empty */
 if(empty($_GET['address']) || empty($_GET['port']) || !$server->exists) {
@@ -33,7 +33,7 @@ if(!$result->num_rows) $database->query("INSERT INTO `points` (`type`, `server_i
 
 /* Check the cache timer, so we don't query the server
 everytime we load the page */
-if($server->data->cachetime > time() - $settings->cache_reset_time) {
+if($server->data->cachetime > time() - $settings->cache_reset_time && true == false) {
 
 	/* Decode the details content */
 	$info = json_decode($server->data->details);
@@ -181,8 +181,3 @@ if($server->data->cachetime > time() - $settings->cache_reset_time) {
 <?php } ?>
 
 <br />
-
-<!-- Recaptcha base -->
-<div id="recaptcha_base">
-	<div id="recaptcha" style="display:none;"><?php echo recaptcha_get_html($settings->public_key, null, $settings->is_secure); ?></div>
-</div>

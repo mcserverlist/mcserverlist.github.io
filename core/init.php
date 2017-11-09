@@ -11,6 +11,7 @@ session_start();
 error_reporting(E_ALL);
 
 define('ROOT', realpath(__DIR__ . '/..'));
+ini_set('default_socket_timeout', 2); /* Setting for the API call */
 
 include 'database/connect.php';
 include 'functions/language.php';
@@ -22,6 +23,7 @@ include 'classes/Servers.php';
 include 'classes/Csrf.php';
 include 'classes/Plugin.php';
 include 'classes/PHPMailer/PHPMailerAutoload.php';
+include 'classes/Captcha.php';
 
 /* Plugins System */
 Plugin::init();

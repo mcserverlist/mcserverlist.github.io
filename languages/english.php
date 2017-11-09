@@ -197,7 +197,6 @@ $language['forms']['settings_private_key']				= "Private Key";
 $language['forms']['main_settings']						= "Main";
 $language['forms']['servers_settings']					= "Server";
 $language['forms']['ads_settings']						= "Ads";
-$language['forms']['recaptcha_settings']				= "ReCaptcha";
 $language['forms']['type']								= "Type";
 $language['forms']['type_help']							= "0->Normal User; 1->Admin; 2->Owner;";
 

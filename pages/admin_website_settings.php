@@ -5,7 +5,7 @@
 	Check out my Twitter @grohsfabian | My website http://grohsfabian.com
 	Portfolio: http://codecanyon.net/user/grohsfabian
  */
- 
+
 User::check_permission(2);
 
 if(!empty($_POST)) {
@@ -56,7 +56,6 @@ if(!empty($_POST)) {
 	<li class="nav-item"><a href="#main" data-toggle="tab" role="tab" class="nav-link active"><?php echo $language['forms']['main_settings']; ?></a></li>
 	<li class="nav-item"><a href="#servers" data-toggle="tab" role="tab" class="nav-link"><?php echo $language['forms']['servers_settings']; ?></a></li>
 	<li class="nav-item"><a href="#ads" data-toggle="tab" role="tab" class="nav-link"><?php echo $language['forms']['ads_settings']; ?></a></li>
-	<li class="nav-item"><a href="#recaptcha" data-toggle="tab" role="tab" class="nav-link"><?php echo $language['forms']['recaptcha_settings']; ?></a></li>
 </ul>
 
 
@@ -123,18 +122,6 @@ if(!empty($_POST)) {
 			<div class="form-group">
 				<label><?php echo $language['forms']['settings_side_ads']; ?></label>
 				<textarea class="form-control" name="side_ads"><?php echo $settings->side_ads; ?></textarea>
-			</div>
-		</div>
-
-		<div class="tab-pane fade" id="recaptcha">
-			<div class="form-group">
-				<label><?php echo $language['forms']['settings_public_key']; ?></label>
-				<input type="text" name="public_key" class="form-control" value="<?php echo $settings->public_key; ?>" />
-			</div>
-
-			<div class="form-group">
-				<label><?php echo $language['forms']['settings_private_key']; ?></label>
-				<input type="text" name="private_key" class="form-control" value="<?php echo $settings->private_key; ?>" />
 			</div>
 		</div>
 

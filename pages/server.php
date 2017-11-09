@@ -149,9 +149,11 @@ if($server->data->cachetime > time() - $settings->cache_reset_time && true == fa
 				</a>
 			</td>
 			<td>
+				<?php if(User::logged_in() && User::is_admin($account_user_id)): ?>
 				<a href="admin/edit-server/<?php echo $server->data->server_id; ?>" class="btn btn-default">
 					<span class="glyphicon glyphicon-pencil"></span> <?php echo $language['forms']['server_admin_edit']; ?>
 				</a>
+				<?php endif; ?>
 			</td>
 		</tr>
 	</tbody>

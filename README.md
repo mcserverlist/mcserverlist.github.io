@@ -21,9 +21,9 @@ Hello everyone! I've created this lite version of the [Minecraft Servers List](h
 1. Open your FTP and connect to your server
 2. Upload the scripts content
 3. Make sure you uploaded the .htaccess file
-4. CHMOD 777 the core/database/connect.php file
-5. Access http://yourdomain.com/install.php with your browser
-6. Enter the required details and hit enter. If there are no errors delete the install.php
+4. Edit the core/database/connect.php file by adding your database details
+5. Import the *dump.sql* file to your database that you just added in the connect.php file
+6. Edit the *settings* table -> *url* column and put your website installation link ( example: https://myservers.com/ ) ( make sure it has a "/" at the end )
 
 You can now login with your admin account( Username: admin ; Password: admin ) by accessing the ** /login ** url.
 
@@ -35,9 +35,14 @@ You can now login with your admin account( Username: admin ; Password: admin ) b
 * file_get_contents() enabled
 
 ## Contact
-You can contact me for support or freelance work at:
+Some of my links..
 
-* **Skype:** neeesteea.soda
+* **Skype:** gfabruno@gmail.com
 * **Email:** gfabruno@gmail.com
 * **Website:** GrohsFabian.com
 * **Twitter:** @GrohsFabian
+* **My envato portfolio:** [grohsfabian/portfolio](https://codecanyon.net/user/grohsfabian/portfolio)
+* **Instagram Dev Page:** [@motivational.coder](https://instagram.com/motivational.coder)
+
+## Extra
+Shoutout to [MCAPI.US](https://mcapi.us/) for having a great API :)

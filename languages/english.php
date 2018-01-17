@@ -19,8 +19,10 @@ $language['errors']['user_doesnt_exist'] 	 			= "The introduced username (<stron
 $language['errors']['email_doesnt_exist']				= "The introduced email does not exist !";
 $language['errors']['empty_fields']	   	 				= "You must fill all the fields !";
 $language['errors']['login_failed']	   	 				= "We couldn't sign you in with those credentials !";
-$language['errors']['cant_access']	   	 				= "You can't access this page at the moment !";$language['errors']['server_name_length']	 			= "Name must be between 3 and 64 characters !";
-$language['errors']['invalid_email']	 				= "You entered an invalid email !";$language['errors']['email_used']						= "We are sorry but that email is already used !";
+$language['errors']['cant_access']	   	 				= "You can't access this page at the moment !";
+$language['errors']['server_name_length']	 			= "Name must be between 3 and 64 characters !";
+$language['errors']['invalid_email']	 				= "You entered an invalid email !";
+$language['errors']['email_used']						= "We are sorry but that email is already used !";
 $language['errors']['incorrect_old_password'] 			= "Your current password is not correct !";
 $language['errors']['password_too_short'] 				= "Your password is too short !";
 $language['errors']['passwords_doesnt_match'] 			= "Password do not match !";

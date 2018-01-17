@@ -41,25 +41,31 @@ if($server->data->cachetime > time() - $settings->cache_reset_time && true == fa
 } else {
 
 	$mcapi_url = 'https://mcapi.us/server/status?ip='.$server->data->query_address.'&port='.$server->data->query_port;
-	$raw_data = file_get_contents($mcapi_url);
-	$info = ($raw_data) ? json_decode($raw_data) : false;
+	$raw_data = @file_get_contents($mcapi_url);
+	$info = (isset($raw_data)) ? json_decode($raw_data) : false;
 
-	/* Update the cache depending on the  status */
-	$info->online = (int) $info->online;
-	if($info->online){
-		$stmt = $database->prepare("UPDATE `servers` SET `status` = ?, `online_players` = ?, `maximum_online_players` = ?, `server_version` = ?, `details` = ?, `cachetime` = unix_timestamp() WHERE `server_id` = {$server->data->server_id}");
-		$stmt->bind_param('sssss', $info->online, $info->players->now, $info->players->max, $info->server->name, $raw_data);
-	} else {
-		$stmt = $database->prepare("UPDATE `servers` SET `status` = ?, `details` = ?, `cachetime` = unix_timestamp() WHERE `server_id` = {$server->data->server_id}");
-		$stmt->bind_param('ss', $info->online, $raw_data);
-	}
-	$stmt->execute();
 
-	/* If the Uptime Tracking plugin is activated */
-	if(Plugin::get('uptime', 'update.php')) include_once Plugin::get('uptime', 'update.php');
+	if($info) {
+        /* Update the cache depending on the  status */
+        $info->online = (int)$info->online;
+        if ($info->online) {
+            $stmt = $database->prepare("UPDATE `servers` SET `status` = ?, `online_players` = ?, `maximum_online_players` = ?, `server_version` = ?, `details` = ?, `cachetime` = unix_timestamp() WHERE `server_id` = {$server->data->server_id}");
+            $stmt->bind_param('sssss', $info->online, $info->players->now, $info->players->max, $info->server->name, $raw_data);
+        } else {
+            $stmt = $database->prepare("UPDATE `servers` SET `status` = ?, `details` = ?, `cachetime` = unix_timestamp() WHERE `server_id` = {$server->data->server_id}");
+            $stmt->bind_param('ss', $info->online, $raw_data);
+        }
+        $stmt->execute();
 
-	/* Decode the MOTD */
-	$info->motd = decodeMotd($info->motd);
+        /* If the Uptime Tracking plugin is activated */
+        if (Plugin::get('uptime', 'update.php')) include_once Plugin::get('uptime', 'update.php');
+
+        /* Decode the MOTD */
+        $info->motd = decodeMotd($info->motd);
+    } else {
+	    /* If the request failed, get the data from database */
+        $info = json_decode($server->data->details);
+    }
 }
 
 
